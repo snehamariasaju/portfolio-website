@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sneha Maria Saju — Design. Code. Curiosity.</title>
+<meta name="description" content="Portfolio of Sneha Maria Saju — MCA student exploring UI/UX, frontend development, and AI.">
+
+<!-- Fonts: Fraunces (display), Inter (body), Space Mono (labels / margin notes) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Fills left-to-right as the visitor scrolls down the page -->
+<div class="scroll-progress" id="scroll-progress"></div>
+
+<!-- ============ NAVIGATION ============ -->
+<header class="site-header">
+  <a href="#top" class="logo">SM<span class="logo-dot">.</span></a>
+
+  <nav class="main-nav" id="main-nav">
+    <a href="#work">Work</a>
+    <a href="#playground">Playground</a>
+    <a href="#about">About</a>
+    <a href="#journey">Journey</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<main id="top">
+
+  <!-- ============ 01 — HERO ============ -->
+  <section class="hero" id="hero">
+    <p class="margin-note note-1" aria-hidden="true">still figuring most of this out —</p>
+
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">Portfolio — 2026</p>
+        <h1 class="hero-name">Sneha Maria&nbsp;Saju</h1>
+        <p class="hero-tagline">Design. Code. Curiosity.</p>
+        <p class="hero-desc">I turn ideas into simple, interactive digital experiences — while exploring the space between design, technology, and AI.</p>
+
+        <p class="status-line"><span class="status-dot"></span>Currently: Learning · Building · Experimenting</p>
+
+        <div class="hero-actions">
+          <a href="#work" class="btn btn-primary">Explore My Work</a>
+          <a href="https://github.com/snehamariasaju" target="_blank" rel="noopener" class="btn btn-ghost">GitHub</a>
+          <a href="#contact" class="btn btn-text">Resume ↓</a>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="photo-frame">
+          <div class="placeholder" data-placeholder="Add Sneha's photo here (portrait, 3:4)">
+            <span>PHOTO</span>
+          </div>
+        </div>
+        <p class="hero-caption">Kerala, India — building one project at a time</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 02 — FEATURED WORK ============ -->
+  <section class="work" id="work">
+    <div class="section-head">
+      <p class="eyebrow">Featured Work</p>
+      <h2 class="section-title">A few things I've built,<br>explored, and learned from.</h2>
+      <p class="section-desc">I like taking an idea and turning it into something people can actually interact with. These are a few projects that helped me learn along the way.</p>
+    </div>
+
+    <!-- Project 01 -->
+    <article class="project project-01">
+      <div class="project-visual">
+        <div class="placeholder placeholder-project" data-placeholder="Add screenshot of AI Stroke Detection project">
+          <span>PROJECT SCREENSHOT</span>
+        </div>
+      </div>
+      <div class="project-copy">
+        <p class="project-question">"What if technology could help identify risk earlier?"</p>
+        <h3 class="project-title">AI Stroke Detection</h3>
+        <p class="project-desc">I explored how machine learning could be used to predict stroke risk from health and lifestyle information, and built a system around that idea.</p>
+        <p class="project-stack">Python · Machine Learning · Classification</p>
+        <div class="project-actions">
+          <a href="#" class="btn btn-ghost btn-small project-view" data-project="stroke">View Project</a>
+          <a href="#" class="btn btn-text btn-small">GitHub — repo coming soon</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Project 02 -->
+    <article class="project project-02">
+      <div class="project-copy">
+        <p class="project-question">"Planning a trip, without planning everything yourself."</p>
+        <h3 class="project-title">AI Travel Planner</h3>
+        <p class="project-desc">I built an AI-powered travel planner that takes a user's preferences and turns them into a more personalized travel experience.</p>
+        <p class="project-stack">AI · Web Development · Recommendation Logic</p>
+        <p class="project-context">Built during the IBM SkillsBuild AI &amp; Cloud internship.</p>
+        <div class="project-actions">
+          <a href="#" class="btn btn-ghost btn-small project-view" data-project="travel">View Project</a>
+          <a href="#" class="btn btn-text btn-small">GitHub — repo coming soon</a>
+        </div>
+      </div>
+      <div class="project-visual">
+        <div class="placeholder placeholder-project" data-placeholder="Add screenshot of AI Travel Planner project">
+          <span>PROJECT SCREENSHOT</span>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- Project detail modal -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <button class="modal-close" id="modal-close" aria-label="Close">✕</button>
+      <div class="placeholder placeholder-project" data-placeholder="Add project screenshot">
+        <span>PROJECT SCREENSHOT</span>
+      </div>
+      <p class="project-question" id="modal-question"></p>
+      <h3 class="project-title" id="modal-title"></h3>
+      <p class="project-desc" id="modal-desc"></p>
+      <p class="project-stack" id="modal-stack"></p>
+    </div>
+  </div>
+
+  <!-- ============ 03 — PLAYGROUND ============ -->
+  <section class="playground" id="playground">
+    <div class="section-head">
+      <p class="eyebrow">Playground</p>
+      <h2 class="section-title">Small things I'm playing with.</h2>
+      <p class="section-desc">I'm learning UI/UX by actually making things. These are small, hands-on experiments — not finished products.</p>
+    </div>
+
+    <div class="lab-grid">
+
+      <!-- Button Lab -->
+      <div class="lab-card">
+        <p class="lab-label">01 · Button Lab</p>
+        <h3 class="lab-title">Hover &amp; interaction states</h3>
+        <div class="lab-demo lab-demo-buttons">
+          <button class="demo-btn demo-btn-fill">Hover me</button>
+          <button class="demo-btn demo-btn-outline">Press me</button>
+          <button class="demo-btn demo-btn-icon">Like <span class="heart">♡</span></button>
+        </div>
+      </div>
+
+      <!-- Card Lab -->
+      <div class="lab-card">
+        <p class="lab-label">02 · Card Lab</p>
+        <h3 class="lab-title">Tilt &amp; lift on hover</h3>
+        <div class="lab-demo lab-demo-cards">
+          <div class="tilt-card">
+            <span class="tilt-card-tag">Design</span>
+            <p>Move your cursor over me.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form Lab -->
+      <div class="lab-card">
+        <p class="lab-label">03 · Form Lab</p>
+        <h3 class="lab-title">A clean login interface</h3>
+        <div class="lab-demo lab-demo-form">
+          <div class="mini-form">
+            <label class="float-label">
+              <input type="text" placeholder=" " autocomplete="off">
+              <span>Username</span>
+            </label>
+            <label class="float-label">
+              <input type="password" id="demo-password" placeholder=" " autocomplete="off">
+              <span>Password</span>
+              <button type="button" class="pw-toggle" id="pw-toggle">Show</button>
+            </label>
+            <button type="button" class="demo-btn demo-btn-fill demo-btn-block">Sign in</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Theme Lab -->
+      <div class="lab-card">
+        <p class="lab-label">04 · Theme Lab</p>
+        <h3 class="lab-title">Light / dark mode</h3>
+        <div class="lab-demo lab-demo-theme">
+          <div class="theme-mockup" id="theme-mockup">
+            <div class="theme-mockup-bar">
+              <span></span><span></span><span></span>
+            </div>
+            <div class="theme-mockup-body">
+              <div class="theme-mockup-line long"></div>
+              <div class="theme-mockup-line short"></div>
+              <div class="theme-mockup-line medium"></div>
+            </div>
+          </div>
+          <button class="theme-toggle" id="theme-toggle" aria-pressed="false">
+            <span class="theme-toggle-icon">☀</span> Toggle theme
+          </button>
+        </div>
+      </div>
+
+      <!-- Navigation Lab -->
+      <div class="lab-card lab-card-wide">
+        <p class="lab-label">05 · Navigation Lab</p>
+        <h3 class="lab-title">A simple responsive menu</h3>
+        <div class="lab-demo lab-demo-nav">
+          <div class="nav-mockup">
+            <div class="nav-mockup-bar">
+              <span class="nav-mockup-logo">brand</span>
+              <button class="nav-mockup-toggle" id="nav-mockup-toggle" aria-label="Toggle menu">☰</button>
+            </div>
+            <div class="nav-mockup-menu" id="nav-mockup-menu">
+              <a href="#">Home</a>
+              <a href="#">Work</a>
+              <a href="#">About</a>
+              <a href="#">Contact</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ 04 — MOMENTS ============ -->
+  <section class="moments" id="moments">
+    <div class="section-head">
+      <p class="eyebrow">Moments That Made Me</p>
+      <h2 class="section-title">A few moments I'm proud of.</h2>
+      <p class="section-desc">Not just because of the result — but because of what I learned along the way.</p>
+    </div>
+
+    <p class="moments-hint">Tap or click a moment to flip it.</p>
+
+    <div class="moments-grid">
+
+      <button class="moment-tile tile-lg" type="button" aria-label="Class Topper — BCA (AI), flip for details">
+        <div class="moment-flip">
+          <div class="moment-front">
+            <div class="placeholder" data-placeholder="Add photo — Class Topper, BCA (AI)"><span>PHOTO</span></div>
+          </div>
+          <div class="moment-back">
+            <p class="moment-title">Class Topper — BCA (AI)</p>
+            <p class="moment-caption">A milestone I'm proud of.</p>
+          </div>
+        </div>
+      </button>
+
+      <button class="moment-tile" type="button" aria-label="IBM AI Developer Professional Certificate, flip for details">
+        <div class="moment-flip">
+          <div class="moment-front">
+            <div class="placeholder" data-placeholder="Add certificate — IBM AI Developer"><span>CERTIFICATE</span></div>
+          </div>
+          <div class="moment-back">
+            <p class="moment-title">IBM AI Developer Professional Certificate</p>
+            <p class="moment-caption">IBM Skills Network / Coursera · June 2026</p>
+          </div>
+        </div>
+      </button>
+
+      <button class="moment-tile" type="button" aria-label="IBM AI Fundamentals, flip for details">
+        <div class="moment-flip">
+          <div class="moment-front">
+            <div class="placeholder" data-placeholder="Add certificate — IBM AI Fundamentals"><span>CERTIFICATE</span></div>
+          </div>
+          <div class="moment-back">
+            <p class="moment-title">IBM AI Fundamentals</p>
+            <p class="moment-caption">IBM SkillsBuild · October 2025</p>
+          </div>
+        </div>
+      </button>
+
+      <button class="moment-tile tile-tall" type="button" aria-label="Generative AI Fundamentals with Google Cloud, flip for details">
+        <div class="moment-flip">
+          <div class="moment-front">
+            <div class="placeholder" data-placeholder="Add certificate — Generative AI, Google Cloud"><span>CERTIFICATE</span></div>
+          </div>
+          <div class="moment-back">
+            <p class="moment-title">Generative AI Fundamentals with Google Cloud</p>
+            <p class="moment-caption">Google Cloud Skills Boost · October 2023</p>
+          </div>
+        </div>
+      </button>
+
+      <button class="moment-tile" type="button" aria-label="Cambridge English Linguaskill B2, flip for details">
+        <div class="moment-flip">
+          <div class="moment-front">
+            <div class="placeholder" data-placeholder="Add certificate — Cambridge Linguaskill"><span>CERTIFICATE</span></div>
+          </div>
+          <div class="moment-back">
+            <p class="moment-title">Cambridge English Linguaskill — B2</p>
+            <p class="moment-caption">Cambridge University Press &amp; Assessment</p>
+          </div>
+        </div>
+      </button>
+
+      <button class="moment-tile" type="button" aria-label="12th CBSE Informatics Practices Topper, flip for details">
+        <div class="moment-flip">
+          <div class="moment-front">
+            <div class="placeholder" data-placeholder="Add photo — 12th CBSE Informatics topper"><span>PHOTO</span></div>
+          </div>
+          <div class="moment-back">
+            <p class="moment-title">12th CBSE Informatics Practices Topper</p>
+            <p class="moment-caption">98% · First Rank in school · March 2023</p>
+          </div>
+        </div>
+      </button>
+
+      <button class="moment-tile tile-lg" type="button" aria-label="First Prize, Patriotic Group Song, flip for details">
+        <div class="moment-flip">
+          <div class="moment-front">
+            <div class="placeholder" data-placeholder="Add photo — Interzone Arts Festival win"><span>PHOTO</span></div>
+          </div>
+          <div class="moment-back">
+            <p class="moment-title">First Prize — Patriotic Group Song</p>
+            <p class="moment-caption">Interzone Arts Festival, University of Calicut · Feb 2025</p>
+          </div>
+        </div>
+      </button>
+
+      <button class="moment-tile" type="button" aria-label="D-Zone Arts Festival prizes, flip for details">
+        <div class="moment-flip">
+          <div class="moment-front">
+            <div class="placeholder" data-placeholder="Add photo — D-Zone Arts Festival"><span>PHOTO</span></div>
+          </div>
+          <div class="moment-back">
+            <p class="moment-title">First Prize (Patriotic) &amp; Third Prize (Eastern) Group Song</p>
+            <p class="moment-caption">D-Zone Arts Festival, University of Calicut</p>
+          </div>
+        </div>
+      </button>
+
+    </div>
+  </section>
+
+  <!-- ============ 05 — ABOUT ============ -->
+  <section class="about" id="about">
+    <p class="margin-note note-2" aria-hidden="true">the fun part is figuring it out —</p>
+
+    <div class="about-grid">
+      <div class="about-photo">
+        <div class="placeholder" data-placeholder="Add a genuine personal photo">
+          <span>PHOTO</span>
+        </div>
+      </div>
+
+      <div class="about-copy">
+        <p class="eyebrow">A Little About Me</p>
+        <p class="about-text">Hi, I'm Sneha.</p>
+        <p class="about-text">I'm an MCA student who enjoys turning ideas into things people can actually see, click, and use. I'm still learning my way around UI/UX and frontend development, but that's also what makes building things exciting for me — I get to experiment, make mistakes, and figure out better ways to do things.</p>
+        <p class="about-text">My background in Artificial Intelligence has made me curious about how technology can solve everyday problems, while my interest in design has made me care about how those solutions actually feel to use.</p>
+        <p class="about-text about-emphasis">Right now, I'm learning, building, and experimenting — one project at a time.</p>
+
+        <div class="about-categories">
+          <div class="about-cat">
+            <p class="about-cat-label">Design</p>
+            <p class="about-cat-desc">Exploring UI/UX</p>
+          </div>
+          <div class="about-cat">
+            <p class="about-cat-label">Build</p>
+            <p class="about-cat-desc">Learning frontend</p>
+          </div>
+          <div class="about-cat">
+            <p class="about-cat-label">Explore</p>
+            <p class="about-cat-desc">AI &amp; technology</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 06 — JOURNEY ============ -->
+  <section class="journey" id="journey">
+    <div class="section-head">
+      <p class="eyebrow">My Journey</p>
+      <h2 class="section-title">A few steps that brought me here.</h2>
+    </div>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-year">2021</div>
+        <div class="timeline-content">
+          <p class="timeline-title">Class 10 — St. Joseph School, Abu Dhabi</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2023</div>
+        <div class="timeline-content">
+          <p class="timeline-title">Class 12 — St. Joseph School, Abu Dhabi</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2023–26</div>
+        <div class="timeline-content">
+          <p class="timeline-title">BCA — Artificial Intelligence</p>
+          <p class="timeline-sub">Sahrdaya College of Advanced Studies</p>
+          <p class="timeline-desc">Where I started exploring programming, AI, and software development.</p>
+        </div>
+      </div>
+      <div class="timeline-item timeline-current">
+        <div class="timeline-year">2026 →</div>
+        <div class="timeline-content">
+          <p class="timeline-title">MCA — Rajagiri College of Social Sciences</p>
+          <p class="timeline-desc">Continuing to learn, build, and explore where technology and creativity meet.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 07 — EXPERIENCE ============ -->
+  <section class="experience">
+    <div class="experience-block">
+      <p class="eyebrow">A Step Outside the Classroom</p>
+      <h3 class="experience-title">IBM SkillsBuild — AI &amp; Cloud Internship</h3>
+      <p class="experience-meta">September 2025 – October 2025 · IBM SkillsBuild / AICTE–Edunet Foundation</p>
+      <p class="experience-text">My first opportunity to explore Artificial Intelligence and Cloud Technologies in a professional learning environment. During the internship, I developed the AI Travel Planner project and participated in expert-led learning sessions.</p>
+    </div>
+  </section>
+
+  <!-- ============ 08 — TOOLKIT ============ -->
+  <section class="toolkit">
+    <div class="section-head">
+      <p class="eyebrow">What I Build With</p>
+    </div>
+
+    <div class="toolkit-grid">
+      <div class="toolkit-group">
+        <p class="toolkit-label">Code</p>
+        <ul class="toolkit-list">
+          <li>HTML</li><li>CSS</li><li>Python</li><li>Java</li><li>SQL</li>
+        </ul>
+      </div>
+      <div class="toolkit-group">
+        <p class="toolkit-label">AI</p>
+        <ul class="toolkit-list">
+          <li>Artificial Intelligence</li><li>Machine Learning</li><li>Generative AI</li>
+        </ul>
+      </div>
+      <div class="toolkit-group">
+        <p class="toolkit-label">Exploring</p>
+        <ul class="toolkit-list">
+          <li>UI/UX</li><li>Figma</li><li>JavaScript</li><li>Frontend development</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="learning-block">
+      <h3 class="learning-title">I'm still figuring things out. That's the fun part.</h3>
+      <ul class="learning-list">
+        <li>UI/UX fundamentals</li>
+        <li>JavaScript</li>
+        <li>Frontend development</li>
+        <li>Interaction design</li>
+        <li>GitHub &amp; project documentation</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ 09 — CONTACT ============ -->
+  <section class="contact" id="contact">
+    <p class="margin-note note-3" aria-hidden="true">say hi, always —</p>
+    <h2 class="contact-title">Let's make<br>something interesting.</h2>
+    <p class="contact-desc">I'm always open to learning, collaborating, and building something new.</p>
+
+    <div class="contact-actions">
+      <a href="https://github.com/snehamariasaju" target="_blank" rel="noopener" class="btn btn-ghost">GitHub</a>
+      <a href="https://linkedin.com/in/sneha-maria-saju" target="_blank" rel="noopener" class="btn btn-ghost">LinkedIn</a>
+      <a href="mailto:snehamsaju@gmail.com" class="btn btn-ghost">Email</a>
+      <a href="#" class="btn btn-primary" id="resume-download">Download Resume</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p>Designed &amp; built by Sneha Maria Saju.</p>
+  <a href="#top" class="back-to-top">Back to top ↑</a>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
