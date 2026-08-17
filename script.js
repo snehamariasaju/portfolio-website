@@ -107,17 +107,224 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  /* ------------------------------------------------------------------
-     0f. ACHIEVEMENT FLIP CARDS
-     Clicking (or pressing Enter/Space on) a moment tile flips it to
-     reveal the title and caption on the back face.
-  ------------------------------------------------------------------ */
-  document.querySelectorAll('.moment-tile').forEach(function (tile) {
-    tile.addEventListener('click', function () {
-      tile.classList.toggle('is-flipped');
-    });
+/* ------------------------------------------------------------------
+   MOMENTS
+   Double-click / double-tap → open image popup
+   Close popup → flip the same card
+------------------------------------------------------------------ */
+
+const momentLightbox =
+  document.getElementById('moment-lightbox');
+
+const lightboxImage =
+  document.getElementById('lightbox-image');
+
+const lightboxClose =
+  document.getElementById('lightbox-close');
+
+let activeMomentTile = null;
+
+
+/* Open the large image */
+function openMomentImage(image, tile) {
+
+  if (!momentLightbox || !lightboxImage) return;
+
+  // Remember which card opened the popup
+  activeMomentTile = tile;
+
+  // Put image into popup
+  lightboxImage.src = image.src;
+  lightboxImage.alt = image.alt;
+
+  // Show popup
+  momentLightbox.classList.add('is-open');
+  momentLightbox.setAttribute('aria-hidden', 'false');
+
+  // Prevent page scrolling
+  document.body.style.overflow = 'hidden';
+}
+
+
+/* Close popup and flip the card */
+function closeMomentImage() {
+
+  if (!momentLightbox) return;
+
+  // Close popup
+  momentLightbox.classList.remove('is-open');
+  momentLightbox.setAttribute('aria-hidden', 'true');
+
+  document.body.style.overflow = '';
+
+  // Flip the SAME card that opened the popup
+  if (activeMomentTile) {
+
+    activeMomentTile.classList.add('is-flipped');
+
+    activeMomentTile = null;
+  }
+
+  // Clear popup image
+  setTimeout(function () {
+
+    if (lightboxImage) {
+      lightboxImage.src = '';
+    }
+
+  }, 300);
+}
+
+
+/* ---------------------------------------------------------------
+   DOUBLE CLICK / DOUBLE TAP
+---------------------------------------------------------------- */
+
+document.querySelectorAll('.moment-tile').forEach(function (tile) {
+
+  let lastTap = 0;
+
+  /* Desktop: double-click */
+  tile.addEventListener('dblclick', function (e) {
+
+    e.preventDefault();
+
+    const image =
+      tile.querySelector('.moment-image');
+
+    if (!image) return;
+
+    openMomentImage(image, tile);
+
   });
 
+
+  /* Mobile: double-tap */
+  tile.addEventListener('touchend', function (e) {
+
+    const currentTime = new Date().getTime();
+
+    const tapLength = currentTime - lastTap;
+
+    if (tapLength < 350 && tapLength > 0) {
+
+      e.preventDefault();
+
+      const image =
+        tile.querySelector('.moment-image');
+
+      if (!image) return;
+
+      openMomentImage(image, tile);
+
+    }
+
+    lastTap = currentTime;
+
+  });
+
+});
+
+
+/* ---------------------------------------------------------------
+   CLOSE BUTTON
+---------------------------------------------------------------- */
+
+if (lightboxClose) {
+
+  lightboxClose.addEventListener(
+    'click',
+    closeMomentImage
+  );
+
+}
+
+
+/* ---------------------------------------------------------------
+   CLICK OUTSIDE IMAGE = CLOSE
+---------------------------------------------------------------- */
+
+if (momentLightbox) {
+
+  momentLightbox.addEventListener(
+    'click',
+    function (e) {
+
+      if (e.target === momentLightbox) {
+        closeMomentImage();
+      }
+
+    }
+  );
+
+}
+
+
+/* ---------------------------------------------------------------
+   ESCAPE KEY = CLOSE
+---------------------------------------------------------------- */
+
+document.addEventListener(
+  'keydown',
+  function (e) {
+
+    if (
+      e.key === 'Escape' &&
+      momentLightbox &&
+      momentLightbox.classList.contains('is-open')
+    ) {
+
+      closeMomentImage();
+
+    }
+
+  }
+);
+/* ---------------------------------------------------------------
+   TAP / CLICK TITLE ON BACK → FLIP CARD BACK TO FRONT
+---------------------------------------------------------------- */
+
+document.querySelectorAll('.moment-tile').forEach(function (tile) {
+
+  const backTitle = tile.querySelector('.moment-back .moment-title');
+
+  if (backTitle) {
+
+    backTitle.addEventListener('click', function (e) {
+
+      e.preventDefault();
+      e.stopPropagation();
+
+      tile.classList.remove('is-flipped');
+
+    });
+
+  }
+
+});
+/* ---------------------------------------------------------------
+   CLICK BACK SIDE → RETURN TO ORIGINAL IMAGE
+---------------------------------------------------------------- */
+
+document.querySelectorAll('.moment-tile').forEach(function (tile) {
+
+  const back = tile.querySelector('.moment-back');
+
+  if (back) {
+
+    back.addEventListener('click', function (e) {
+
+      e.preventDefault();
+      e.stopPropagation();
+
+      // Flip back to the original image
+      tile.classList.remove('is-flipped');
+
+    });
+
+  }
+
+});
   /* ------------------------------------------------------------------
      1. MOBILE NAVIGATION MENU
      Toggles the nav open/closed and updates the hamburger icon + aria.
@@ -228,71 +435,41 @@ document.addEventListener('DOMContentLoaded', function () {
     if (e.key === 'Escape') closeModal();
   });
 
-  /* ------------------------------------------------------------------
-     4. BUTTON LAB — "like" heart toggle
-  ------------------------------------------------------------------ */
-  const likeBtn = document.querySelector('.demo-btn-icon');
-  if (likeBtn) {
-    likeBtn.addEventListener('click', function () {
-      const liked = likeBtn.classList.toggle('is-liked');
-      const heart = likeBtn.querySelector('.heart');
-      heart.textContent = liked ? '♥' : '♡';
-      likeBtn.firstChild.textContent = liked ? 'Liked ' : 'Like ';
-    });
-  }
+  
+
 
   /* ------------------------------------------------------------------
-     5. FORM LAB — show / hide password
+     9. SITE-WIDE DARK / LIGHT MODE
+     Controls the whole site via [data-theme] on <html>. The initial
+     theme is already set by the inline script in <head> (to avoid a
+     flash of the wrong theme) — this block only wires up the button
+     and keeps localStorage in sync from here on.
   ------------------------------------------------------------------ */
-  const pwToggle = document.getElementById('pw-toggle');
-  const pwInput = document.getElementById('demo-password');
-  if (pwToggle && pwInput) {
-    pwToggle.addEventListener('click', function () {
-      const isPassword = pwInput.type === 'password';
-      pwInput.type = isPassword ? 'text' : 'password';
-      pwToggle.textContent = isPassword ? 'Hide' : 'Show';
-    });
+  const themeToggleBtn = document.getElementById('site-theme-toggle');
+
+  function updateThemeButton() {
+    if (!themeToggleBtn) return;
+    const isLight = document.documentElement.dataset.theme === 'light';
+
+    themeToggleBtn.setAttribute('aria-pressed', isLight ? 'true' : 'false');
+
+    const icon = themeToggleBtn.querySelector('.theme-icon');
+    const label = themeToggleBtn.querySelector('.theme-label');
+    if (icon) icon.textContent = isLight ? '🌙' : '☀️';
+    if (label) label.textContent = isLight ? 'Dark' : 'Light';
   }
 
-  /* ------------------------------------------------------------------
-     6. THEME LAB — toggles light/dark on the small mockup only
-     (This is a contained demo, not a site-wide theme switch.)
-  ------------------------------------------------------------------ */
-  const themeToggle = document.getElementById('theme-toggle');
-  const themeMockup = document.getElementById('theme-mockup');
-  if (themeToggle && themeMockup) {
-    themeToggle.addEventListener('click', function () {
-      const isDark = themeMockup.classList.toggle('is-dark');
-      themeToggle.setAttribute('aria-pressed', isDark ? 'true' : 'false');
-      themeToggle.querySelector('.theme-toggle-icon').textContent = isDark ? '☾' : '☀';
+  if (themeToggleBtn) {
+    themeToggleBtn.addEventListener('click', function () {
+      const current = document.documentElement.dataset.theme;
+      const next = current === 'light' ? 'dark' : 'light';
+      document.documentElement.dataset.theme = next;
+      localStorage.setItem('portfolio-theme', next);
+      updateThemeButton();
     });
-  }
 
-  /* ------------------------------------------------------------------
-     7. NAVIGATION LAB — mini responsive menu inside the mockup frame
-  ------------------------------------------------------------------ */
-  const navMockupToggle = document.getElementById('nav-mockup-toggle');
-  const navMockupMenu = document.getElementById('nav-mockup-menu');
-  if (navMockupToggle && navMockupMenu) {
-    navMockupToggle.addEventListener('click', function () {
-      navMockupMenu.classList.toggle('is-open');
-    });
-  }
-
-  /* ------------------------------------------------------------------
-     8. RESUME DOWNLOAD BUTTON
-     No resume file is linked yet — this gives a clear, friendly note
-     instead of a broken/fake download. Replace the href with a real
-     PDF link (or point it at Google Drive / GitHub) when ready.
-  ------------------------------------------------------------------ */
-  const resumeBtn = document.getElementById('resume-download');
-  if (resumeBtn) {
-    resumeBtn.addEventListener('click', function (e) {
-      e.preventDefault();
-      const original = resumeBtn.textContent;
-      resumeBtn.textContent = 'Add resume link in script.js';
-      setTimeout(function () { resumeBtn.textContent = original; }, 1800);
-    });
+    updateThemeButton();
   }
 
 });
+

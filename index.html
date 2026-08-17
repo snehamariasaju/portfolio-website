@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -6,12 +6,21 @@
 <title>Sneha Maria Saju — Design. Code. Curiosity.</title>
 <meta name="description" content="Portfolio of Sneha Maria Saju — MCA student exploring UI/UX, frontend development, and AI.">
 
-<!-- Fonts: Fraunces (display), Inter (body), Space Mono (labels / margin notes) -->
+<!-- Fonts: Space Grotesk (display), Inter (body), Space Mono (labels / margin notes) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="style.css">
+
+<!-- Set the theme before first paint so there's no flash of the wrong theme -->
+<script>
+  (function () {
+    var saved = localStorage.getItem('portfolio-theme');
+    var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    document.documentElement.dataset.theme = theme;
+  })();
+</script>
 </head>
 <body>
 
@@ -20,14 +29,19 @@
 
 <!-- ============ NAVIGATION ============ -->
 <header class="site-header">
-  <a href="#top" class="logo">SM<span class="logo-dot">.</span></a>
+  <a href="#top" class="logo">SMS<span class="logo-dot">.</span></a>
 
   <nav class="main-nav" id="main-nav">
     <a href="#work">Work</a>
-    <a href="#playground">Playground</a>
     <a href="#about">About</a>
     <a href="#journey">Journey</a>
     <a href="#contact">Contact</a>
+
+    <button id="site-theme-toggle" class="site-theme-toggle"
+            aria-label="Toggle dark and light mode"
+            aria-pressed="false">
+      <span class="theme-label">Light</span>
+    </button>
   </nav>
 
   <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false">
@@ -39,14 +53,17 @@
 
   <!-- ============ 01 — HERO ============ -->
   <section class="hero" id="hero">
-    <p class="margin-note note-1" aria-hidden="true">still figuring most of this out —</p>
+    <div class="hero-bg" aria-hidden="true">
+      <span class="hero-orb orb-purple"></span>
+      <span class="hero-orb orb-cyan"></span>
+    </div>
+    
 
     <div class="hero-grid">
       <div class="hero-copy">
-        <p class="eyebrow">Portfolio — 2026</p>
         <h1 class="hero-name">Sneha Maria&nbsp;Saju</h1>
         <p class="hero-tagline">Design. Code. Curiosity.</p>
-        <p class="hero-desc">I turn ideas into simple, interactive digital experiences — while exploring the space between design, technology, and AI.</p>
+        <p class="hero-desc">I turn ideas into simple, interactive digital experiences  while exploring the space between design, technology, and AI.</p>
 
         <p class="status-line"><span class="status-dot"></span>Currently: Learning · Building · Experimenting</p>
 
@@ -57,15 +74,7 @@
         </div>
       </div>
 
-      <div class="hero-visual">
-        <div class="photo-frame">
-          <div class="placeholder" data-placeholder="Add Sneha's photo here (portrait, 3:4)">
-            <span>PHOTO</span>
-          </div>
-        </div>
-        <p class="hero-caption">Kerala, India — building one project at a time</p>
-      </div>
-    </div>
+
   </section>
 
   <!-- ============ 02 — FEATURED WORK ============ -->
@@ -79,9 +88,11 @@
     <!-- Project 01 -->
     <article class="project project-01">
       <div class="project-visual">
-        <div class="placeholder placeholder-project" data-placeholder="Add screenshot of AI Stroke Detection project">
-          <span>PROJECT SCREENSHOT</span>
-        </div>
+  <img
+    src="aistroke.jpg"
+    alt="AI Stroke Detection project screenshot"
+  >
+</div>
       </div>
       <div class="project-copy">
         <p class="project-question">"What if technology could help identify risk earlier?"</p>
@@ -89,8 +100,7 @@
         <p class="project-desc">I explored how machine learning could be used to predict stroke risk from health and lifestyle information, and built a system around that idea.</p>
         <p class="project-stack">Python · Machine Learning · Classification</p>
         <div class="project-actions">
-          <a href="#" class="btn btn-ghost btn-small project-view" data-project="stroke">View Project</a>
-          <a href="#" class="btn btn-text btn-small">GitHub — repo coming soon</a>
+          <a href="https://github.com/snehamariasaju/AI-Stroke-Detection-System.git" class="btn btn-text btn-small">GitHub</a>
         </div>
       </div>
     </article>
@@ -104,15 +114,15 @@
         <p class="project-stack">AI · Web Development · Recommendation Logic</p>
         <p class="project-context">Built during the IBM SkillsBuild AI &amp; Cloud internship.</p>
         <div class="project-actions">
-          <a href="#" class="btn btn-ghost btn-small project-view" data-project="travel">View Project</a>
-          <a href="#" class="btn btn-text btn-small">GitHub — repo coming soon</a>
+          <a href="https://github.com/snehamariasaju/AI-Travel-Planner.git" class="btn btn-text btn-small">GitHub </a>
         </div>
       </div>
       <div class="project-visual">
-        <div class="placeholder placeholder-project" data-placeholder="Add screenshot of AI Travel Planner project">
-          <span>PROJECT SCREENSHOT</span>
-        </div>
-      </div>
+  <img 
+    src="travel.jpg" 
+    alt="AI Travel Planner project screenshot"
+  >
+</div>
     </article>
   </section>
 
@@ -130,102 +140,7 @@
     </div>
   </div>
 
-  <!-- ============ 03 — PLAYGROUND ============ -->
-  <section class="playground" id="playground">
-    <div class="section-head">
-      <p class="eyebrow">Playground</p>
-      <h2 class="section-title">Small things I'm playing with.</h2>
-      <p class="section-desc">I'm learning UI/UX by actually making things. These are small, hands-on experiments — not finished products.</p>
-    </div>
-
-    <div class="lab-grid">
-
-      <!-- Button Lab -->
-      <div class="lab-card">
-        <p class="lab-label">01 · Button Lab</p>
-        <h3 class="lab-title">Hover &amp; interaction states</h3>
-        <div class="lab-demo lab-demo-buttons">
-          <button class="demo-btn demo-btn-fill">Hover me</button>
-          <button class="demo-btn demo-btn-outline">Press me</button>
-          <button class="demo-btn demo-btn-icon">Like <span class="heart">♡</span></button>
-        </div>
-      </div>
-
-      <!-- Card Lab -->
-      <div class="lab-card">
-        <p class="lab-label">02 · Card Lab</p>
-        <h3 class="lab-title">Tilt &amp; lift on hover</h3>
-        <div class="lab-demo lab-demo-cards">
-          <div class="tilt-card">
-            <span class="tilt-card-tag">Design</span>
-            <p>Move your cursor over me.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Form Lab -->
-      <div class="lab-card">
-        <p class="lab-label">03 · Form Lab</p>
-        <h3 class="lab-title">A clean login interface</h3>
-        <div class="lab-demo lab-demo-form">
-          <div class="mini-form">
-            <label class="float-label">
-              <input type="text" placeholder=" " autocomplete="off">
-              <span>Username</span>
-            </label>
-            <label class="float-label">
-              <input type="password" id="demo-password" placeholder=" " autocomplete="off">
-              <span>Password</span>
-              <button type="button" class="pw-toggle" id="pw-toggle">Show</button>
-            </label>
-            <button type="button" class="demo-btn demo-btn-fill demo-btn-block">Sign in</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Theme Lab -->
-      <div class="lab-card">
-        <p class="lab-label">04 · Theme Lab</p>
-        <h3 class="lab-title">Light / dark mode</h3>
-        <div class="lab-demo lab-demo-theme">
-          <div class="theme-mockup" id="theme-mockup">
-            <div class="theme-mockup-bar">
-              <span></span><span></span><span></span>
-            </div>
-            <div class="theme-mockup-body">
-              <div class="theme-mockup-line long"></div>
-              <div class="theme-mockup-line short"></div>
-              <div class="theme-mockup-line medium"></div>
-            </div>
-          </div>
-          <button class="theme-toggle" id="theme-toggle" aria-pressed="false">
-            <span class="theme-toggle-icon">☀</span> Toggle theme
-          </button>
-        </div>
-      </div>
-
-      <!-- Navigation Lab -->
-      <div class="lab-card lab-card-wide">
-        <p class="lab-label">05 · Navigation Lab</p>
-        <h3 class="lab-title">A simple responsive menu</h3>
-        <div class="lab-demo lab-demo-nav">
-          <div class="nav-mockup">
-            <div class="nav-mockup-bar">
-              <span class="nav-mockup-logo">brand</span>
-              <button class="nav-mockup-toggle" id="nav-mockup-toggle" aria-label="Toggle menu">☰</button>
-            </div>
-            <div class="nav-mockup-menu" id="nav-mockup-menu">
-              <a href="#">Home</a>
-              <a href="#">Work</a>
-              <a href="#">About</a>
-              <a href="#">Contact</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
+ 
 
   <!-- ============ 04 — MOMENTS ============ -->
   <section class="moments" id="moments">
@@ -239,23 +154,34 @@
 
     <div class="moments-grid">
 
-      <button class="moment-tile tile-lg" type="button" aria-label="Class Topper — BCA (AI), flip for details">
-        <div class="moment-flip">
-          <div class="moment-front">
-            <div class="placeholder" data-placeholder="Add photo — Class Topper, BCA (AI)"><span>PHOTO</span></div>
-          </div>
-          <div class="moment-back">
-            <p class="moment-title">Class Topper — BCA (AI)</p>
-            <p class="moment-caption">A milestone I'm proud of.</p>
-          </div>
+<button class="moment-tile tile-lg" type="button"
+        aria-label="Class Topper — BCA (AI)">
+
+    <div class="moment-flip">
+
+        <div class="moment-front">
+            <img src="topper.jpeg"
+                 alt="Class Topper — BCA Artificial Intelligence"
+                 class="moment-image">
         </div>
-      </button>
+
+        <div class="moment-back">
+            <p class="moment-title">Class Topper — BCA (AI)</p>
+            <p class="moment-caption">
+                A milestone I'm proud of.
+            </p>
+        </div>
+
+    </div>
+</button>
 
       <button class="moment-tile" type="button" aria-label="IBM AI Developer Professional Certificate, flip for details">
         <div class="moment-flip">
           <div class="moment-front">
-            <div class="placeholder" data-placeholder="Add certificate — IBM AI Developer"><span>CERTIFICATE</span></div>
-          </div>
+            <img src="ibm.jpg"
+         alt="IBM AI Developer Professional Certificate"
+         class="moment-image">
+</div>
           <div class="moment-back">
             <p class="moment-title">IBM AI Developer Professional Certificate</p>
             <p class="moment-caption">IBM Skills Network / Coursera · June 2026</p>
@@ -266,8 +192,10 @@
       <button class="moment-tile" type="button" aria-label="IBM AI Fundamentals, flip for details">
         <div class="moment-flip">
           <div class="moment-front">
-            <div class="placeholder" data-placeholder="Add certificate — IBM AI Fundamentals"><span>CERTIFICATE</span></div>
-          </div>
+          <img src="ai.jpg"
+         alt="IBM AI Fundamentals Certificate"
+         class="moment-image">
+</div>
           <div class="moment-back">
             <p class="moment-title">IBM AI Fundamentals</p>
             <p class="moment-caption">IBM SkillsBuild · October 2025</p>
@@ -275,35 +203,13 @@
         </div>
       </button>
 
-      <button class="moment-tile tile-tall" type="button" aria-label="Generative AI Fundamentals with Google Cloud, flip for details">
+      <button class="moment-tile tile-tall" type="button" aria-label="12th CBSE Informatics Practices Topper, flip for details">
         <div class="moment-flip">
           <div class="moment-front">
-            <div class="placeholder" data-placeholder="Add certificate — Generative AI, Google Cloud"><span>CERTIFICATE</span></div>
-          </div>
-          <div class="moment-back">
-            <p class="moment-title">Generative AI Fundamentals with Google Cloud</p>
-            <p class="moment-caption">Google Cloud Skills Boost · October 2023</p>
-          </div>
-        </div>
-      </button>
-
-      <button class="moment-tile" type="button" aria-label="Cambridge English Linguaskill B2, flip for details">
-        <div class="moment-flip">
-          <div class="moment-front">
-            <div class="placeholder" data-placeholder="Add certificate — Cambridge Linguaskill"><span>CERTIFICATE</span></div>
-          </div>
-          <div class="moment-back">
-            <p class="moment-title">Cambridge English Linguaskill — B2</p>
-            <p class="moment-caption">Cambridge University Press &amp; Assessment</p>
-          </div>
-        </div>
-      </button>
-
-      <button class="moment-tile" type="button" aria-label="12th CBSE Informatics Practices Topper, flip for details">
-        <div class="moment-flip">
-          <div class="moment-front">
-            <div class="placeholder" data-placeholder="Add photo — 12th CBSE Informatics topper"><span>PHOTO</span></div>
-          </div>
+         <img src="12.jpeg"
+         alt="12th CBSE Informatics Practices Topper"
+         class="moment-image">
+</div>
           <div class="moment-back">
             <p class="moment-title">12th CBSE Informatics Practices Topper</p>
             <p class="moment-caption">98% · First Rank in school · March 2023</p>
@@ -311,11 +217,28 @@
         </div>
       </button>
 
+
+      <button class="moment-tile" type="button" aria-label="Generative AI Fundamentals with Google Cloud, flip for details">
+        <div class="moment-flip">
+          <div class="moment-front">
+    <img src="cloud.jpg"
+         alt="Generative AI Fundamentals with Google Cloud"
+         class="moment-image">
+</div>
+          <div class="moment-back">
+            <p class="moment-title">Generative AI Fundamentals with Google Cloud</p>
+            <p class="moment-caption">Google Cloud Skills Boost · October 2023</p>
+          </div>
+        </div>
+      </button>
+
       <button class="moment-tile tile-lg" type="button" aria-label="First Prize, Patriotic Group Song, flip for details">
         <div class="moment-flip">
           <div class="moment-front">
-            <div class="placeholder" data-placeholder="Add photo — Interzone Arts Festival win"><span>PHOTO</span></div>
-          </div>
+        <img src="interzone.jpeg"
+         alt="Interzone Arts Festival"
+         class="moment-image">
+</div>
           <div class="moment-back">
             <p class="moment-title">First Prize — Patriotic Group Song</p>
             <p class="moment-caption">Interzone Arts Festival, University of Calicut · Feb 2025</p>
@@ -323,28 +246,14 @@
         </div>
       </button>
 
-      <button class="moment-tile" type="button" aria-label="D-Zone Arts Festival prizes, flip for details">
-        <div class="moment-flip">
-          <div class="moment-front">
-            <div class="placeholder" data-placeholder="Add photo — D-Zone Arts Festival"><span>PHOTO</span></div>
-          </div>
-          <div class="moment-back">
-            <p class="moment-title">First Prize (Patriotic) &amp; Third Prize (Eastern) Group Song</p>
-            <p class="moment-caption">D-Zone Arts Festival, University of Calicut</p>
-          </div>
-        </div>
-      </button>
-
-    </div>
   </section>
 
   <!-- ============ 05 — ABOUT ============ -->
   <section class="about" id="about">
-    <p class="margin-note note-2" aria-hidden="true">the fun part is figuring it out —</p>
-
     <div class="about-grid">
       <div class="about-photo">
-        <div class="placeholder" data-placeholder="Add a genuine personal photo">
+        <img src="photo.jpeg" alt="My Photo">
+        <div class="placeholder" data-placeholder="Add photos">
           <span>PHOTO</span>
         </div>
       </div>
@@ -405,22 +314,71 @@
       <div class="timeline-item timeline-current">
         <div class="timeline-year">2026 →</div>
         <div class="timeline-content">
-          <p class="timeline-title">MCA — Rajagiri College of Social Sciences</p>
+          <p class="timeline-title">MCA </p>
+          <p class="timeline-sub">Rajagiri College of Social Sciences</p>
           <p class="timeline-desc">Continuing to learn, build, and explore where technology and creativity meet.</p>
         </div>
       </div>
     </div>
   </section>
+<!-- ============ 07 — EXPERIENCE ============ -->
 
-  <!-- ============ 07 — EXPERIENCE ============ -->
-  <section class="experience">
-    <div class="experience-block">
-      <p class="eyebrow">A Step Outside the Classroom</p>
-      <h3 class="experience-title">IBM SkillsBuild — AI &amp; Cloud Internship</h3>
-      <p class="experience-meta">September 2025 – October 2025 · IBM SkillsBuild / AICTE–Edunet Foundation</p>
-      <p class="experience-text">My first opportunity to explore Artificial Intelligence and Cloud Technologies in a professional learning environment. During the internship, I developed the AI Travel Planner project and participated in expert-led learning sessions.</p>
-    </div>
-  </section>
+<section class="experience" id="experience">
+
+  <div class="section-head">
+    <p class="eyebrow">EXPERIENCE</p>
+    <h2>Where I've Been Learning</h2>
+  </div>
+
+
+  <!-- IBM SKILLSBUILD -->
+
+  <article class="experience-block">
+
+    <p class="eyebrow">
+      A STEP OUTSIDE THE CLASSROOM
+    </p>
+
+    <h3 class="experience-title">
+      IBM SkillsBuild — AI &amp; Cloud Internship
+    </h3>
+
+    <p class="experience-meta">
+      September 2025 – October 2025 · IBM SkillsBuild / AICTE–Edunet Foundation
+    </p>
+
+    <p class="experience-text">
+      During the internship, I gained hands-on exposure to Artificial Intelligence and Cloud Technologies in a professional learning environment. I developed the AI Travel Planner project while strengthening my technical skills through expert-led sessions and practical learning experiences.
+
+    </p>
+
+  </article>
+
+
+  <!-- GAME DEVELOPMENT -->
+
+  <article class="experience-block">
+
+    <h3 class="experience-title">
+      Game Development Intern
+    </h3>
+
+    <p class="experience-meta">
+      January 2025 · Immersive Skills Academy · Internship
+    </p>
+
+    <p class="experience-text">
+      Developed a 2D platformer game in Unity during a capstone project.
+      Designed levels, implemented player movement and shooter mechanics,
+      managed animations, and applied Unity's physics system. Integrated
+      health, traps, enemies, camera controls, and audio to create a
+      complete gameplay experience. Strengthened skills in game development,
+      problem-solving, and creative programming.
+    </p>
+
+  </article>
+
+</section>
 
   <!-- ============ 08 — TOOLKIT ============ -->
   <section class="toolkit">
@@ -444,13 +402,13 @@
       <div class="toolkit-group">
         <p class="toolkit-label">Exploring</p>
         <ul class="toolkit-list">
-          <li>UI/UX</li><li>Figma</li><li>JavaScript</li><li>Frontend development</li>
+          <li>UI/UX</li><li>JavaScript</li><li>Frontend development</li>
         </ul>
       </div>
     </div>
 
     <div class="learning-block">
-      <h3 class="learning-title">I'm still figuring things out. That's the fun part.</h3>
+      
       <ul class="learning-list">
         <li>UI/UX fundamentals</li>
         <li>JavaScript</li>
@@ -470,18 +428,34 @@
     <div class="contact-actions">
       <a href="https://github.com/snehamariasaju" target="_blank" rel="noopener" class="btn btn-ghost">GitHub</a>
       <a href="https://linkedin.com/in/sneha-maria-saju" target="_blank" rel="noopener" class="btn btn-ghost">LinkedIn</a>
-      <a href="mailto:snehamsaju@gmail.com" class="btn btn-ghost">Email</a>
-      <a href="#" class="btn btn-primary" id="resume-download">Download Resume</a>
+      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=snehamsaju@gmail.com"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="btn btn-primary"
+      >Email
+      </a>
+      <a href="Sneha Maria Saju_Resume.pdf" class="btn btn-primary" id="resume-download">Download Resume</a>
     </div>
   </section>
 
 </main>
 
 <footer class="site-footer">
-  <p>Designed &amp; built by Sneha Maria Saju..</p>
+  <p>Designed &amp; built by Sneha Maria Saju.</p>
   <a href="#top" class="back-to-top">Back to top ↑</a>
 </footer>
+<!-- MOMENT IMAGE LIGHTBOX -->
+<div class="moment-lightbox" id="moment-lightbox" aria-hidden="true">
 
+    <button class="lightbox-close" id="lightbox-close" aria-label="Close image">
+        ✕
+    </button>
+
+    <div class="lightbox-content">
+        <img id="lightbox-image" src="" alt="Expanded moment">
+    </div>
+
+</div>
 <script src="script.js"></script>
 </body>
 </html>
